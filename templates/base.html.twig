@@ -14,6 +14,17 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <a href="{{ path('tableau_de_bord') }}"><h1>Tableau de bord</h1></a>
+            <nav>
+                <a href="{{ path('achats') }}">Liste des achats</a>
+                <a href="{{ path('ajout_achat') }}">Ajouter un achat</a>
+            </nav>
+            <a href="{{ path('connexion') }}">Connexion</a>
+            <a href="{{ path('inscription') }}">Inscription</a>
+        </header>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
     </body>
 </html>
