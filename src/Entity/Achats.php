@@ -49,9 +49,13 @@ class Achats
     #[ORM\OneToMany(mappedBy: 'achats', targetEntity: PhotoFactures::class, orphanRemoval: true)]
     private $photoFactures;
 
+    #[ORM\OneToMany(mappedBy: 'achats', targetEntity: Images::class, orphanRemoval: true)]
+    private $images;
+
     public function __construct()
     {
         $this->photoFactures = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,6 +171,36 @@ class Achats
             // set the owning side to null (unless already changed)
             if ($photoFacture->getAchats() === $this) {
                 $photoFacture->setAchats(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setAchats($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getAchats() === $this) {
+                $image->setAchats(null);
             }
         }
 
