@@ -19,9 +19,14 @@
             <nav>
                 <a href="{{ path('achats') }}">Liste des achats</a>
                 <a href="{{ path('ajout_achat') }}">Ajouter un achat</a>
+                {% if app.user %}
+                <a href="{{ path('inscription') }}">Inscription</a>
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                <a href="{{ path('connexion') }}">Connexion</a>
+                {% endif %}
             </nav>
-            <a href="{{ path('connexion') }}">Connexion</a>
-            <a href="{{ path('inscription') }}">Inscription</a>
+            
         </header>
         <main>
             {% block main %}{% endblock %}

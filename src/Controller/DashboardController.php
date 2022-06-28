@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     /**
-     * @Route("/tableau_de_bord", name="tableau_de_bord")
+     * @Route("/", name="tableau_de_bord")
      */
     public function index(): Response
     {
@@ -17,24 +17,8 @@ class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
-    /**
-     * @Route("/tableau_de_bord/inscription", name="inscription")
-     */
-    public function inscription(): Response
-    {
-        return $this->render('tableau_de_bord/inscription.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
-    }
-    /**
-     * @Route("/tableau_de_bord/connexion", name="connexion")
-     */
-    public function connexion(): Response
-    {
-        return $this->render('tableau_de_bord/connexion.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
-    }
+    
+
     /**
      * @Route("/tableau_de_bord/achats", name="achats")
      */
