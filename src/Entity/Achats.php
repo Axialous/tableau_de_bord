@@ -2,45 +2,39 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\SlugTrait;
 use App\Repository\AchatsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+//use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AchatsRepository::class)]
 class Achats
 {
+    use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank()]
-    #[Assert\Length(min: 2, max:50)]
     private $lieu_achat;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank()]
-    #[Assert\Length(min: 2, max:50)]
     private $nom_produit;
 
     #[ORM\Column(type: 'integer')]
     private $id_categorie;
 
     #[ORM\Column(type: 'date')]
-    #[Assert\NotNull()]
     private $date_achat;
 
     #[ORM\Column(type: 'date')]
-    #[Assert\NotNull()]
+    
     private $fin_garantie;
 
     #[ORM\Column(type: 'float')]
-    #[Assert\NotNull()]
-    #[Assert\Positive()]
-    #[Assert\LessThan(200)]
     private $prix;
 
     #[ORM\Column(type: 'text')]
@@ -99,12 +93,12 @@ class Achats
         return $this;
     }
 
-    public function getDateAchat(): ?\DateTimeImmutable
+    public function getDateAchat(): ?\DateTime
     {
         return $this->date_achat;
     }
 
-    public function setDateAchat(\DateTimeImmutable $date_achat): self
+    public function setDateAchat(\DateTime $date_achat): self
     {
         $this->date_achat = $date_achat;
 
@@ -146,6 +140,17 @@ class Achats
 
         return $this;
     }
+    public function getCategories(): ?Categories
+    {
+        return $this->categories;
+    }
+
+    /*public function (?Categories $categories): self
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }*/
 
     /**
      * @return Collection<int, PhotoFactures>
@@ -177,8 +182,8 @@ class Achats
         return $this;
     }
 
-    /**
-     * @return Collection<int, Images>
+   /**
+     * @return Collection|Images[]
      */
     public function getImages(): Collection
     {
