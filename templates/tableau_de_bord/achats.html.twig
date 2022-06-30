@@ -3,5 +3,20 @@
 {% block title %}Achats{% endblock %}
 
 {% block main %}
-<h1>Tableau des achats</h1>
+<section class="container">
+    <h1>Liste des achats</h1>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Catégorie</th>
+            <th>Lieu d'achat</th>
+            <th>Date d'achat</th>
+            <th>Date de fin de garantie</th>
+            <th>Prix</th>
+            <th>Modifier</th>
+            <th>Supprimmer</th>
+            {# {% for i in 0..10 %} #}
+        </tr>
+    </table>
+</section>
 {% endblock %}
