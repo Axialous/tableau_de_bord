@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Achats;
+use App\Entity\Trait\SlugTrait;
 use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
 class Categories
 {
+    use SlugTrait;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -19,14 +23,19 @@ class Categories
     private $name;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private $parent;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private $categories;
+    
+    #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Achats::class)]
+    private $achats;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->achats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,7 +68,7 @@ class Categories
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection|self[]
      */
     public function getCategories(): Collection
     {
@@ -82,6 +91,35 @@ class Categories
             // set the owning side to null (unless already changed)
             if ($category->getParent() === $this) {
                 $category->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+/**
+     * @return Collection|Achats[]
+     */
+    public function getAchats(): Collection
+    {
+        return $this->achats;
+    }
+
+    public function addAchat(Achats $achat): self
+    {
+        if (!$this->achats->contains($achat)) {
+            $this->achats[] = $achat;
+            $achat->setCategories($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achats $achat): self
+    {
+        if ($this->achats->removeElement($achat)) {
+            // set the owning side to null (unless already changed)
+            if ($achat->getCategories() === $this) {
+                $achat->setCategories(null);
             }
         }
 
