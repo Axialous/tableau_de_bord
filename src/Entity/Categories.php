@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Achats;
 use App\Entity\Trait\SlugTrait;
 use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -104,7 +103,7 @@ class Categories
         return $this->achats;
     }
 
-    public function addAchat(Achats $achat): self
+  /*  public function addAchat(Achats $achat): self
     {
         if (!$this->achats->contains($achat)) {
             $this->achats[] = $achat;
@@ -124,5 +123,5 @@ class Categories
         }
 
         return $this;
-    }
+    }*/
 }
