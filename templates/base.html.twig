@@ -21,19 +21,32 @@
 
     </head>
     <body>
-        <header>
-            <a href="{{ path('tableau_de_bord') }}"><h1>Tableau de bord</h1></a>
-            <nav>
-                <a href="{{ path('achats') }}">Liste des achats</a>
-                <a href="{{ path('ajout_achat') }}">Ajouter un achat</a>
-                {% if app.user %}
-                <a href="{{ path('inscription') }}">Inscription</a>
-                <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                <a href="{{ path('connexion') }}">Connexion</a>
-                {% endif %}
-            </nav>
-            
+        <header class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path('tableau_de_bord') }}"><h1>Tableau de bord</h1></a>
+                <nav class=""collapse navbar-collapse>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('achats') }}">Liste des achats</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('ajout_achat') }}">Ajouter un achat</a>
+                        </li>
+                        {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
         </header>
         <main>
             {% block main %}{% endblock %}
