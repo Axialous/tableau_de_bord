@@ -9,7 +9,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoriesFixtures extends Fixture
 {
-  //  private $counter = 1;
+    private $counter = 1;
 
     public function __construct(private SluggerInterface $slugger){}
 

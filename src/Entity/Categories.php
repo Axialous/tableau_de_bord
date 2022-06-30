@@ -108,7 +108,7 @@ class Categories
     {
         if (!$this->achats->contains($achat)) {
             $this->achats[] = $achat;
-            $achat->setCategories($this);
+            $achat->setIdCategorie($this);
         }
 
         return $this;
@@ -119,7 +119,7 @@ class Categories
         if ($this->achats->removeElement($achat)) {
             // set the owning side to null (unless already changed)
             if ($achat->getCategories() === $this) {
-                $achat->setCategories(null);
+                $achat->setIdCategorie(null);
             }
         }
 
