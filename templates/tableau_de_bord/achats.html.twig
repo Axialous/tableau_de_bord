@@ -11,12 +11,31 @@
             <th>Catégorie</th>
             <th>Lieu d'achat</th>
             <th>Date d'achat</th>
-            <th>Date de fin de garantie</th>
+            <th>Fin de garantie</th>
             <th>Prix</th>
+            <th>Détail</th>
             <th>Modifier</th>
             <th>Supprimmer</th>
-            {# {% for i in 0..10 %} #}
         </tr>
+        {% for achat in achats %}
+            <tr>
+                <td>{{ achat.nomProduit }}</td>
+                <td>
+                    {% for categorie in categories %}
+                        {% if categorie.id == achat.idCategorie %}
+                            {{ categorie.name }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ achat.lieuAchat }}</td>
+                <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
+                <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
+                <td>{{ achat.prix }}</td>
+                <td><a href="{{ path('visualisation_achat', {'id': achat.id}) }}">Visualiser</a></td>
+                <td><a href="{{ path('modification_achat', {'id': achat.id}) }}">modifier</a></td>
+                <td><a href="{{ path('suppression_achat', {'id': achat.id}) }}">supprimer</a></td>
+            </tr>
+        {% endfor %}
     </table>
 </section>
 {% endblock %}
