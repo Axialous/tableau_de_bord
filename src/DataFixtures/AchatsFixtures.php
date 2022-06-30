@@ -25,10 +25,8 @@ class AchatsFixtures extends Fixture
             $achat->setSlug($this->slugger->slug($achat->getNomProduit())->lower());
             $achat->setPrix($faker->numberBetween (900, 300000));
             $achat->setInformations($faker->text());
-
-            //chercher la référence de catégorie
-            $category = $this->getReference('cat-'. rand(1, 8));
-            $achat->setCategories($category);
+    
+            $achat->setIdCategorie(1);
 
             $this->setReference('ach-'.$ach, $achat);
             $manager->persist($achat);
