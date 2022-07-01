@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form_ajout_achat 'bootstrap_5_layout.html.twig' %}
+
 {% block title %}Ajouter un achat{% endblock %}
 
 {% block main %}
-<h1>Formulaire d'ajout d'achat</h1>
+<section>
+    <h1>Formulaire d'ajout d'achat</h1>
+
+    {{ form_start(form_ajout_achat) }}
+
+    {{ form_row(form_ajout_achat.nom_produit) }}
+    {{ form_row(form_ajout_achat.id_categorie) }}
+    {{ form_row(form_ajout_achat.informations) }}
+    {{ form_row(form_ajout_achat.lieu_achat) }}
+    {{ form_row(form_ajout_achat.date_achat) }}
+    {{ form_row(form_ajout_achat.fin_garantie) }}
+    {{ form_row(form_ajout_achat.prix) }}
+
+    <button type="submit" class="btn btn-success">Ajouter l'achat</button>
+
+    {{ form_end(form_ajout_achat) }}
+
+</section>
 {% endblock %}

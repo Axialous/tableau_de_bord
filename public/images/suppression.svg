@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04, custom)"
-   sodipodi:docname="visualisation.svg"
+   sodipodi:docname="suppression.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,13 +24,13 @@
      inkscape:document-units="mm"
      showgrid="false"
      units="px"
-     inkscape:zoom="10.274984"
-     inkscape:cx="11.727512"
-     inkscape:cy="29.82973"
+     inkscape:zoom="10.162006"
+     inkscape:cx="30.259774"
+     inkscape:cy="30.456585"
      inkscape:window-width="1294"
      inkscape:window-height="860"
-     inkscape:window-x="2062"
-     inkscape:window-y="131"
+     inkscape:window-x="2129"
+     inkscape:window-y="185"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
@@ -40,9 +40,9 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       id="path1252"
+       id="path7154"
        style="fill:#ffffff;fill-opacity:0.94999999;stroke:none;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 30 15 C 14.999998 15 0 30 0 30 C -2.3684758e-15 30 15.000002 45 30 45 C 45.000001 45 60 30 60 30 C 60 30 45.000002 15 30 15 z M 30.025391 22.5 A 7.5 7.5 0 0 1 37.5 30 L 37.5 30.101562 A 7.5 7.5 0 0 1 29.923828 37.5 A 7.5 7.5 0 0 1 22.5 29.949219 A 7.5 7.5 0 0 1 30.025391 22.5 z "
+       d="M 30 0 C 22.256475 -4.6518427e-07 19.844069 5.3297817 19.091797 8.6523438 C 20.439497 8.3849852 21.8201 8.1516109 23.222656 7.9667969 C 24.076169 5.9498022 25.937868 3.7499995 30 3.75 C 34.062132 3.7500005 35.923831 5.9498023 36.777344 7.9667969 C 38.1799 8.151611 39.560503 8.3849851 40.908203 8.6523438 C 40.155931 5.3297818 37.743524 4.6518431e-07 30 0 z M 30 11.25 C 15 11.25 4.7369516e-15 18.75 0 18.75 L 60 18.75 C 60 18.75 44.999999 11.25 30 11.25 z M 3.75 22.5 L 11.25 60 L 48.75 60 L 56.25 22.5 L 45 22.5 L 41.625 56.25 L 37.875 56.25 L 41.25 22.5 L 18.75 22.5 L 22.125 56.25 L 18.375 56.25 L 15 22.5 L 3.75 22.5 z "
        transform="scale(0.26458333)" />
   </g>
 </svg>

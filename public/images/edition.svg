@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04, custom)"
-   sodipodi:docname="visualisation.svg"
+   sodipodi:docname="edition.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,12 +25,12 @@
      showgrid="false"
      units="px"
      inkscape:zoom="10.274984"
-     inkscape:cx="11.727512"
-     inkscape:cy="29.82973"
+     inkscape:cx="21.26524"
+     inkscape:cy="32.068176"
      inkscape:window-width="1294"
      inkscape:window-height="860"
-     inkscape:window-x="2062"
-     inkscape:window-y="131"
+     inkscape:window-x="1878"
+     inkscape:window-y="60"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
@@ -40,9 +40,9 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       id="path1252"
-       style="fill:#ffffff;fill-opacity:0.94999999;stroke:none;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 30 15 C 14.999998 15 0 30 0 30 C -2.3684758e-15 30 15.000002 45 30 45 C 45.000001 45 60 30 60 30 C 60 30 45.000002 15 30 15 z M 30.025391 22.5 A 7.5 7.5 0 0 1 37.5 30 L 37.5 30.101562 A 7.5 7.5 0 0 1 29.923828 37.5 A 7.5 7.5 0 0 1 22.5 29.949219 A 7.5 7.5 0 0 1 30.025391 22.5 z "
+       id="path2625"
+       style="fill:#ffffff;stroke:none;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0.94999999"
+       d="M 45 0 L 37.5 7.5 L 52.5 22.5 L 60 15 C 60 7.5000015 52.5 0 45 0 z M 33.75 11.25 L 11.25 33.75 C 18.750001 33.75 18.75 41.25 18.75 41.25 C 18.75 41.25 26.249999 41.25 26.25 48.75 L 48.75 26.25 L 33.75 11.25 z M 7.5 37.5 L 0 60 L 22.5 52.5 C 22.500002 45 15 45 15 45 C 15 45 15.000002 37.5 7.5 37.5 z "
        transform="scale(0.26458333)" />
   </g>
 </svg>

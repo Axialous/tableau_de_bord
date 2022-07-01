@@ -3,5 +3,51 @@
 {% block title %}Visualiser un achat{% endblock %}
 
 {% block main %}
-<h1>Achat</h1>
+<section>
+    <h1>Achat</h1>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <td>{{ achat.nomProduit }}</td>
+        </tr>
+        <tr>
+            <th>Catégorie</th>
+            <td>
+                {% for categorie in categories %}
+                    {% if categorie.id == achat.idCategorie %}
+                        {{ categorie.name }}
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Lieu d'achat</th>
+            <td>{{ achat.lieuAchat }}</td>
+        </tr>
+        <tr>
+            <th>Date d'achat</th>
+            <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Fin de garantie</th>
+            <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ achat.prix }}</td>
+        </tr>
+        <tr>
+            <th>Informations</th>
+            <td>{{ achat.informations }}</td>
+        </tr>
+        <tr>
+            <th>Ticket d'achat</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Manuel d'utilisation</th>
+            <td></td>
+        </tr>
+    </table>
+</section>
 {% endblock %}

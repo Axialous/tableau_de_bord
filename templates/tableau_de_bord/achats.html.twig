@@ -3,7 +3,7 @@
 {% block title %}Achats{% endblock %}
 
 {% block main %}
-<section class="container">
+<section>
     <h1>Liste des achats</h1>
     <table>
         <tr>
@@ -13,13 +13,13 @@
             <th>Date d'achat</th>
             <th>Fin de garantie</th>
             <th>Prix</th>
-            <th>Détail</th>
-            <th>Modifier</th>
-            <th>Supprimmer</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         {% for achat in achats %}
             <tr>
-                <td>{{ achat.nomProduit }}</td>
+                <th>{{ achat.nomProduit }}</th>
                 <td>
                     {% for categorie in categories %}
                         {% if categorie.id == achat.idCategorie %}
@@ -31,9 +31,9 @@
                 <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
                 <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
                 <td>{{ achat.prix }}</td>
-                <td><a href="{{ path('visualisation_achat', {'id': achat.id}) }}">Visualiser</a></td>
-                <td><a href="{{ path('modification_achat', {'id': achat.id}) }}">modifier</a></td>
-                <td><a href="{{ path('suppression_achat', {'id': achat.id}) }}">supprimer</a></td>
+                <td><a href="{{ path('visualisation_achat', {'id': achat.id}) }}"><img src="{{ asset('images/visualisation.svg') }}" alt="Visualiser"></a></td>
+                <td><a href="{{ path('modification_achat', {'id': achat.id}) }}"><img src="{{ asset('images/edition.svg') }}" alt="Éditer"></a></td>
+                <td><a href="{{ path('suppression_achat', {'id': achat.id}) }}"><img src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a></td>
             </tr>
         {% endfor %}
     </table>
