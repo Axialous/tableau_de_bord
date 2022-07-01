@@ -1,0 +1,29 @@
+section {
+    margin: auto;
+    width: fit-content;
+}
+
+tr {
+    color: hsla(0, 0%, 100%, 95%);
+}
+tr:nth-child(odd) {
+    background-color: hsl(38, 14%, 40%);
+}
+tr:nth-child(even) {
+    background-color: hsl(38, 14%, 30%);
+}
+
+th:first-child {
+    background-color: hsla(38, 14%, 25%, 50%);
+}
+th, td {
+    padding: 10px;
+}
+
+table img {
+    width: 30px;
+}
+
+table img:hover {
+    transform: scale(111%);
+}
