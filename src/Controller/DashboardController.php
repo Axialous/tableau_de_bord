@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Achats;
 use App\Entity\Categories;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -45,7 +47,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/tableau_de_bord/achats/ajout", name="ajout_achat")
      */
-    public function ajout_achat(Request $request, EntityManagerInterface $manager): response
+    public function ajout_achat(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): response
     {
         $achat = new Achats();
 
@@ -57,13 +59,28 @@ class DashboardController extends AbstractController
                      ->add('fin_garantie')
                      ->add('prix')
                      ->add('informations')
+                     ->add('ticket_achat', FileType::class, [
+                         'mapped' => false
+                         ])
                      ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $achat->setSlug("texte");
-            dump($achat);
+
+            $ticket_achat_file = $form->get('ticket_achat')->getData();
+            if ($ticket_achat_file) {
+                $nom_original_file = pathinfo($ticket_achat_file->getClientOriginalName(), PATHINFO_FILENAME);
+                $nom_securise_file = $slugger->slug($nom_original_file);
+                $nom_nouveau_file = $nom_securise_file.'-'.uniqid().'.'.$ticket_achat_file->guessExtension();
+                try {
+                    $ticket_achat_file->move($this->getParameter('direction_tickets'), $nom_nouveau_file);
+                } catch (FileException $e) {
+
+                }
+                $achat->setTicketAchat($nom_nouveau_file);
+            }
 
             $manager->persist($achat);
             $manager->flush();
@@ -94,7 +111,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/tableau_de_bord/achats/{id}/modification", name="modification_achat")
      */
-    public function modification_achat($id, Request $request, EntityManagerInterface $manager) :response
+    public function modification_achat($id, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger) :response
     {
         $achats = $this->getDoctrine()->getRepository(Achats::class);
         $achat = $achats->find($id);
@@ -107,13 +124,27 @@ class DashboardController extends AbstractController
                      ->add('fin_garantie')
                      ->add('prix')
                      ->add('informations')
+                     ->add('ticket_achat', FileType::class, [
+                         'mapped' => false,
+                         'required' => false
+                         ])
                      ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $achat->setSlug("texte");
-            dump($achat);
+
+            $ticket_achat_file = $form->get('ticket_achat')->getData();
+            if ($ticket_achat_file) {
+                $nom_file = 'ticket_' . $id . '.' . $ticket_achat_file->guessExtension();
+                try {
+                    $ticket_achat_file->move($this->getParameter('direction_tickets'), $nom_file);
+                } catch (FileException $e) {
+
+                }
+                $achat->setTicketAchat($nom_file);
+            }
 
             $manager->persist($achat);
             $manager->flush();
@@ -141,6 +172,8 @@ class DashboardController extends AbstractController
     {
         $achats = $this->getDoctrine()->getRepository(Achats::class);
         $achat = $achats->find($id);
+
+        unlink($this->getparameter('direction_tickets') . '/' . $achat->getTicketAchat());
 
         $manager->remove($achat);
         $manager->flush();
