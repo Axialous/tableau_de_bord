@@ -7,23 +7,28 @@ tr {
     color: hsla(0, 0%, 100%, 95%);
 }
 tr:nth-child(odd) {
-    background-color: hsl(38, 14%, 40%);
+    background-color: hsl(123, 42%, 47%);
 }
 tr:nth-child(even) {
-    background-color: hsl(38, 14%, 30%);
+    background-color: hsl(123, 45%, 35%);
 }
 
 th:first-child {
-    background-color: hsla(38, 14%, 25%, 50%);
+    background-color: rgba(167, 167, 167, 0.5);
 }
 th, td {
     padding: 10px;
 }
 
-table img {
+table img.icone {
     width: 30px;
 }
 
-table img:hover {
+table img.icone:hover {
     transform: scale(111%);
+}
+
+table img:not(.icone) {
+    max-width: 500px;
+    max-height: 1000px;
 }

@@ -32,7 +32,6 @@ class Achats
     private $date_achat;
 
     #[ORM\Column(type: 'date')]
-    
     private $fin_garantie;
 
     #[ORM\Column(type: 'float')]
@@ -40,6 +39,9 @@ class Achats
 
     #[ORM\Column(type: 'text')]
     private $informations;
+
+    #[ORM\Column(type: 'text')]
+    private $ticket_achat;
 
     #[ORM\OneToMany(mappedBy: 'achats', targetEntity: PhotoFactures::class, orphanRemoval: true)]
     private $photoFactures;
@@ -141,6 +143,19 @@ class Achats
 
         return $this;
     }
+
+    public function getTicketAchat(): ?string
+    {
+        return $this->ticket_achat;
+    }
+
+    public function setTicketAchat(string $ticket_achat): self
+    {
+        $this->ticket_achat = $ticket_achat;
+
+        return $this;
+    }
+
     public function getCategories(): ?Categories
     {
         return $this->categories;
