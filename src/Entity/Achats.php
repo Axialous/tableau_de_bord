@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\Categories;
 use App\Entity\Trait\SlugTrait;
-use App\Repository\AchatsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AchatsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 //use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AchatsRepository::class)]
@@ -24,8 +25,8 @@ class Achats
     #[ORM\Column(type: 'string', length: 255)]
     private $nom_produit;
 
-    #[ORM\Column(type: 'integer')]
-    private $id_categorie;
+    #[ORM\ManyToOne(inversedBy: 'achats', targetEntity: Categories::class)]
+    private $categorie;
 
     #[ORM\Column(type: 'date')]
     private $date_achat;
@@ -81,14 +82,14 @@ class Achats
         return $this;
     }
 
-    public function getIdCategorie(): ?int
+    public function getCategorie(): ?Categories
     {
-        return $this->id_categorie;
+        return $this->categorie;
     }
 
-    public function setIdCategorie(int $id_categorie): self
+    public function setCategorie(?Categories $categorie): self
     {
-        $this->id_categorie = $id_categorie;
+        $this->categorie = $categorie;
 
         return $this;
     }

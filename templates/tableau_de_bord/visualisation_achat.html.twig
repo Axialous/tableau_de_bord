@@ -12,13 +12,7 @@
         </tr>
         <tr>
             <th>Catégorie</th>
-            <td>
-                {% for categorie in categories %}
-                    {% if categorie.id == achat.idCategorie %}
-                        {{ categorie.name }}
-                    {% endif %}
-                {% endfor %}
-            </td>
+            <td>{{ achat.categorie }}</td>
         </tr>
         <tr>
             <th>Lieu d'achat</th>
