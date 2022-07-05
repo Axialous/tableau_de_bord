@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form_modification_achat 'bootstrap_5_layout.html.twig' %}
+
 {% block title %}Modifier un achat{% endblock %}
 
 {% block main %}
-<h1>Formulaire de modification d'achat</h1>
+    <section>
+        <h1>Formulaire de modification d'achat</h1>
+
+        {{ form_start(form_modification_achat) }}
+
+        {{ form_row(form_modification_achat.nom_produit) }}
+        {{ form_row(form_modification_achat.categorie) }}
+        {{ form_row(form_modification_achat.informations) }}
+        {{ form_row(form_modification_achat.lieu_achat) }}
+        {{ form_row(form_modification_achat.date_achat) }}
+        {{ form_row(form_modification_achat.fin_garantie) }}
+        {{ form_row(form_modification_achat.prix) }}
+
+        <button type="submit" class="btn btn-success">Modifier l'achat</button>
+
+        {{ form_end(form_modification_achat) }}
+
+    </section>
 {% endblock %}
