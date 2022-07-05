@@ -21,11 +21,7 @@
             <tr>
                 <th>{{ achat.nomProduit }}</th>
                 <td>
-                    {% for categorie in categories %}
-                        {% if categorie.id == achat.idCategorie %}
-                            {{ categorie.name }}
-                        {% endif %}
-                    {% endfor %}
+                    {{ achat.categorie }}
                 </td>
                 <td>{{ achat.lieuAchat }}</td>
                 <td>{{ achat.dateAchat|date('d/m/Y') }}</td>

@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\Achats;
 use App\Entity\Trait\SlugTrait;
-use App\Repository\CategoriesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoriesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
 class Categories
@@ -54,6 +55,14 @@ class Categories
         return $this;
     }
 
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->name;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
+
     public function getParent(): ?self
     {
         return $this->parent;
@@ -95,7 +104,7 @@ class Categories
 
         return $this;
     }
-/**
+    /**
      * @return Collection|Achats[]
      */
     public function getAchats(): Collection

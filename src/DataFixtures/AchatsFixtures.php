@@ -25,7 +25,7 @@ class AchatsFixtures extends Fixture
             $achat->setSlug($this->slugger->slug($achat->getNomProduit())->lower());
             $achat->setPrix($faker->numberBetween (900, 300000));
             $achat->setInformations($faker->text());
-            $achat->setIdCategorie(21);
+            // $achat->setCategorie(21);
 
             $this->setReference('ach-'.$ach, $achat);
             $manager->persist($achat);
