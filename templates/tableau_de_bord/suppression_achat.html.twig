@@ -3,5 +3,9 @@
 {% block title %}Supprimer un achat{% endblock %}
 
 {% block main %}
-<h1>Voulez-vous vraiment supprimer cet Achat ?</h1>
+    <section>
+        <h1>Voulez-vous vraiment supprimer cet Achat ?</h1>
+        <a href="{{ path('suppression_achat_valide', {'id': id}) }}">Valider</a>
+        <a href="{{ path('achats') }}">Annuler</a>
+    </section>
 {% endblock %}

@@ -94,7 +94,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/tableau_de_bord/achats/{id}/modification", name="modification_achat")
      */
-    public function modification_achat($id, Request $request, EntityManagerInterface $manager)
+    public function modification_achat($id, Request $request, EntityManagerInterface $manager) :response
     {
         $achats = $this->getDoctrine()->getRepository(Achats::class);
         $achat = $achats->find($id);
@@ -130,7 +130,21 @@ class DashboardController extends AbstractController
      */
     public function suppression_achat($id): response
     {
+        return $this->render('tableau_de_bord/suppression_achat.html.twig', [
+            'id' => $id,
+        ]);
+    }
+    /**
+     * @Route("/tableau_de_bord/achat/{id})/suppression/valide", name="suppression_achat_valide")
+     */
+    public function suppression_achat_valide($id, EntityManagerInterface $manager): response
+    {
+        $achats = $this->getDoctrine()->getRepository(Achats::class);
+        $achat = $achats->find($id);
 
-        return $this->render('tableau_de_bord/suppression_achat.html.twig');
+        $manager->remove($achat);
+        $manager->flush();
+
+        return $this->redirectToRoute('achats');
     }
 }
