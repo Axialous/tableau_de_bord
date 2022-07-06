@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220630092838 extends AbstractMigration
+final class Version20220706141847 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,17 +21,13 @@ final class Version20220630092838 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE achats ADD slug VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE categories DROP FOREIGN KEY FK_3AF34668727ACA70');
-        $this->addSql('ALTER TABLE categories ADD slug VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE categories ADD CONSTRAINT FK_3AF34668727ACA70 FOREIGN KEY (parent_id) REFERENCES categories (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE categories ADD color VARCHAR(7) DEFAULT NULL, ADD slug VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE achats DROP slug');
-        $this->addSql('ALTER TABLE categories DROP FOREIGN KEY FK_3AF34668727ACA70');
-        $this->addSql('ALTER TABLE categories DROP slug');
-        $this->addSql('ALTER TABLE categories ADD CONSTRAINT FK_3AF34668727ACA70 FOREIGN KEY (parent_id) REFERENCES categories (id)');
+        $this->addSql('ALTER TABLE categories DROP color, DROP slug');
     }
 }

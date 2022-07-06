@@ -14,11 +14,7 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
         
-        <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
-        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
 
     </head>
     <body>
@@ -39,5 +35,10 @@
         <main>
             {% block main %}{% endblock %}
         </main>
+        <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>
