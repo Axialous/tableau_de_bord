@@ -4,44 +4,52 @@
 
 {% block main %}
 <section>
-    <h1>Achat</h1>
-    <table>
-        <tr>
-            <th>Nom</th>
-            <td>{{ achat.nomProduit }}</td>
-        </tr>
-        <tr>
-            <th>Catégorie</th>
-            <td>{{ achat.categorie }}</td>
-        </tr>
-        <tr>
-            <th>Lieu d'achat</th>
-            <td>{{ achat.lieuAchat }}</td>
-        </tr>
-        <tr>
-            <th>Date d'achat</th>
-            <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Fin de garantie</th>
-            <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Prix</th>
-            <td>{{ achat.prix }}</td>
-        </tr>
-        <tr>
-            <th>Informations</th>
-            <td>{{ achat.informations }}</td>
-        </tr>
-        <tr>
-            <th>Ticket d'achat</th>
-            <td><img src="{{ asset('donnees/tickets/' ~ achat.ticketAchat) }}" alt="Ticket d'achat n° {{ achat.id }}"></td>
-        </tr>
-        <tr>
-            <th>Manuel d'utilisation</th>
-            <td></td>
-        </tr>
-    </table>
+    <figure>
+        <figcaption class="ligne ecartee">
+            <h1>Achat n<sup>o</sup> {{ achat.id }}</h1>
+            <nav>
+                <a href="{{ path('modification_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a>
+                <a href="{{ path('suppression_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a>
+            </nav>
+        </figcaption>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <td>{{ achat.nomProduit }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ achat.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Lieu d'achat</th>
+                <td>{{ achat.lieuAchat }}</td>
+            </tr>
+            <tr>
+                <th>Date d'achat</th>
+                <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Fin de garantie</th>
+                <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ achat.prix }}</td>
+            </tr>
+            <tr>
+                <th>Informations</th>
+                <td>{{ achat.informations }}</td>
+            </tr>
+            <tr>
+                <th>Ticket d'achat</th>
+                <td><img src="{{ asset('donnees/tickets/' ~ achat.ticketAchat) }}" alt="Ticket d'achat n° {{ achat.id }}"></td>
+            </tr>
+            <tr>
+                <th>Manuel d'utilisation</th>
+                <td></td>
+            </tr>
+        </table>
+    </figure>
 </section>
 {% endblock %}
