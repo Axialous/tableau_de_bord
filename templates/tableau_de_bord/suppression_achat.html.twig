@@ -5,7 +5,9 @@
 {% block main %}
     <section>
         <h1>Voulez-vous vraiment supprimer cet Achat ?</h1>
-        <a href="{{ path('suppression_achat_valide', {'id': id}) }}">Valider</a>
-        <a href="{{ path('achats') }}">Annuler</a>
+        <nav class="ligne">
+            <a href="{{ path('suppression_achat_valide', {'id': id}) }}">Valider</a>
+            <a href="{{ path('achats') }}">Annuler</a>
+        </nav>
     </section>
 {% endblock %}

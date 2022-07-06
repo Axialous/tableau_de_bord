@@ -4,34 +4,41 @@
 
 {% block main %}
 <section>
-    <h1>Liste des achats</h1>
-    <table>
-        <tr>
-            <th>Nom</th>
-            <th>Catégorie</th>
-            <th>Lieu d'achat</th>
-            <th>Date d'achat</th>
-            <th>Fin de garantie</th>
-            <th>Prix</th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        {% for achat in achats %}
+    <figure>
+        <figcaption class="ligne ecartee">
+            <h1>Liste des achats</h1>
+            <nav>
+                <a href="{{ path('ajout_achat') }}"><img class="icone" src="{{ asset('images/ajout.svg') }}" alt="Ajouter"></a>
+            </nav>
+        </figcaption>
+        <table>
             <tr>
-                <th>{{ achat.nomProduit }}</th>
-                <td>
-                    {{ achat.categorie }}
-                </td>
-                <td>{{ achat.lieuAchat }}</td>
-                <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
-                <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
-                <td>{{ achat.prix }}</td>
-                <td><a href="{{ path('visualisation_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/visualisation.svg') }}" alt="Visualiser"></a></td>
-                <td><a href="{{ path('modification_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a></td>
-                <td><a href="{{ path('suppression_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a></td>
+                <th>Nom</th>
+                <th>Catégorie</th>
+                <th>Lieu d'achat</th>
+                <th>Date d'achat</th>
+                <th>Fin de garantie</th>
+                <th>Prix</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for achat in achats %}
+                <tr>
+                    <th>{{ achat.nomProduit }}</th>
+                    <td>
+                        {{ achat.categorie }}
+                    </td>
+                    <td>{{ achat.lieuAchat }}</td>
+                    <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
+                    <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
+                    <td>{{ achat.prix }}</td>
+                    <td><a href="{{ path('visualisation_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/visualisation.svg') }}" alt="Visualiser"></a></td>
+                    <td><a href="{{ path('modification_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a></td>
+                    <td><a href="{{ path('suppression_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </figure>
 </section>
 {% endblock %}
