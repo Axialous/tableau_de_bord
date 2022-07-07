@@ -32,6 +32,10 @@ html a:hover {
     background-color: hsla(128, 56%, 67%, 50%);
 }
 
+canvas {
+    max-height: 60vh;
+}
+
 /* EN-TÊTE */
 
 header {
@@ -189,9 +193,17 @@ table img {
 
 /* Formulaires */
 
-button {
-    background-color: hsl(88, 58%, 40%) !important;
-    border: solid 1px hsl(88, 58%, 40%) !important;
+form.ligne {
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+form.ligne > *:not(:last-child) {
+    margin-right: 20px;
+}
+
+form.ligne > *:not(button) {
+    flex-grow: 1;
 }
 
 textarea {
@@ -206,6 +218,13 @@ input:focus, select:focus, textarea:focus, button:focus {
 input:checked {
     background-color: hsl(123, 67%, 20%) !important;
     border: solid 1px hsl(123, 67%, 20%) !important;
+}
+
+button {
+    background-color: hsl(88, 58%, 40%) !important;
+    border: solid 1px hsl(88, 58%, 40%) !important;
+    
+    height: min-content;
 }
 
 form > a {

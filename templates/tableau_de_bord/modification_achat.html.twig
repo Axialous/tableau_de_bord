@@ -13,17 +13,17 @@
 
             {{ form_start(form_modification_achat) }}
 
-            {{ form_row(form_modification_achat.nom_produit) }}
-            {{ form_row(form_modification_achat.categorie) }}
-            {{ form_row(form_modification_achat.informations) }}
-            {{ form_row(form_modification_achat.lieu_achat) }}
-            {{ form_row(form_modification_achat.date_achat) }}
-            {{ form_row(form_modification_achat.fin_garantie) }}
-            {{ form_row(form_modification_achat.prix) }}
-            {{ form_row(form_modification_achat.ticket_achat) }}
-            {{ form_row(form_modification_achat.manuel_utilisation) }}
+                {{ form_row(form_modification_achat.nom_produit, {'label': 'Nom'}) }}
+                {{ form_row(form_modification_achat.categorie, {'label': 'Catégorie'}) }}
+                {{ form_row(form_modification_achat.informations, {'label': 'Informations sur le produit'}) }}
+                {{ form_row(form_modification_achat.lieu_achat, {'label': 'Lieu d\'achat'}) }}
+                {{ form_row(form_modification_achat.date_achat, {'label': 'Date d\'achat'}) }}
+                {{ form_row(form_modification_achat.fin_garantie, {'label': 'Date de fin de garantie'}) }}
+                {{ form_row(form_modification_achat.prix, {'label': 'Prix en €'}) }}
+                {{ form_row(form_modification_achat.ticket_achat, {'label': 'Ticket d\'achat'}) }}
+                {{ form_row(form_modification_achat.manuel_utilisation, {'label': 'Manuel d\'utilisation'}) }}
 
-            <button type="submit" class="btn btn-success">Modifier l'achat</button>
+                <button type="submit" class="btn btn-success">Modifier l'achat</button>
 
             {{ form_end(form_modification_achat) }}
         </figure>

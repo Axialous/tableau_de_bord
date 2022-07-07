@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block main %}
+    <section>
+        {% if statistiques %}
+            <figure>
+                <figcaption>
+                    <h1>Comparaison des sommes dépensées par secteur du {#{  }#} au {#{  }#}</h1>
+                </figcaption>
+                <canvas id="myChart" width="400" height="100"></canvas>
+                <script>
+                const ctx = document.getElementById('myChart');
+                const myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: [
+                            {% for categorie in statistiques %}
+                                '{{ categorie['nom'] }}',
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [
+                                {% for categorie in statistiques %}
+                                    {{ categorie['somme_depensee'] }},
+                                {% endfor %}
+                            ],
+                            backgroundColor: [
+                                {% for categorie in statistiques %}
+                                    'hsla({{ categorie['teinte'] }}, 80%, 50%, 0.2)',
+                                {% endfor %}
+                            ],
+                            borderColor: [
+                                {% for categorie in statistiques %}
+                                    'hsla({{ categorie['teinte'] }}, 80%, 50%, 1)',
+                                {% endfor %}
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                </script>
+            </figure>
+        {% endif %}
+
+        <figure>
+            <figcaption>
+                <h1>Sur quelle période voulez-vous étudier les sommes dépensées ?</h1>
+            </figcaption>
+
+            {{ form_start(form_periode, {'attr': {'class': 'ligne ecartee'}}) }}
+
+                {{ form_row(form_periode.debut_periode, {'label': 'Date de début'}) }}
+                {{ form_row(form_periode.fin_periode, {'label': 'Date de fin'}) }}
+
+                <button type="submit" class="btn btn-success">Afficher le graphique</button>
+
+            {{ form_end(form_periode) }}
+        </figure>
+    </section>
+{% endblock %}

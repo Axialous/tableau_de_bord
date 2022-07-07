@@ -25,9 +25,10 @@
         <header>
             <a href="{{ path('tableau_de_bord') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo"><h1>Tableau de bord</h1></a>
             <nav>
-                <a href="{{ path('achats') }}">Liste des achats</a>
-                <a href="{{ path('ajout_achat') }}">Ajouter un achat</a>
                 {% if app.user %}
+                    <a href="{{ path('achats') }}">Liste des achats</a>
+                    <a href="{{ path('ajout_achat') }}">Ajouter un achat</a>
+                    <a href="{{ path('statistiques') }}">Statistiques</a>
                     <a href="{{ path('inscription') }}">Ajouter un utilisateur</a>
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
                 {% else %}

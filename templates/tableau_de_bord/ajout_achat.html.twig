@@ -13,17 +13,17 @@
 
             {{ form_start(form_ajout_achat) }}
 
-            {{ form_row(form_ajout_achat.nom_produit) }}
-            {{ form_row(form_ajout_achat.categorie) }}
-            {{ form_row(form_ajout_achat.informations) }}
-            {{ form_row(form_ajout_achat.lieu_achat) }}
-            {{ form_row(form_ajout_achat.date_achat) }}
-            {{ form_row(form_ajout_achat.fin_garantie) }}
-            {{ form_row(form_ajout_achat.prix) }}
-            {{ form_row(form_ajout_achat.ticket_achat) }}
-            {{ form_row(form_ajout_achat.manuel_utilisation) }}
+                {{ form_row(form_ajout_achat.nom_produit, {'label': 'Nom'}) }}
+                {{ form_row(form_ajout_achat.categorie, {'label': 'Catégorie'}) }}
+                {{ form_row(form_ajout_achat.informations, {'label': 'Informations sur le produit'}) }}
+                {{ form_row(form_ajout_achat.lieu_achat, {'label': 'Lieu d\'achat'}) }}
+                {{ form_row(form_ajout_achat.date_achat, {'label': 'Date d\'achat'}) }}
+                {{ form_row(form_ajout_achat.fin_garantie, {'label': 'Date de fin de garantie'}) }}
+                {{ form_row(form_ajout_achat.prix, {'label': 'Prix en €'}) }}
+                {{ form_row(form_ajout_achat.ticket_achat, {'label': 'Ticket d\'achat'}) }}
+                {{ form_row(form_ajout_achat.manuel_utilisation, {'label': 'Manuel d\'utilisation'}) }}
 
-            <button type="submit" class="btn btn-success">Ajouter l'achat</button>
+                <button type="submit" class="btn btn-success">Ajouter l'achat</button>
 
             {{ form_end(form_ajout_achat) }}
 
