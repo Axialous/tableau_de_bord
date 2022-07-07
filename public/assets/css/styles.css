@@ -29,7 +29,7 @@ html a:hover {
 }
 
 ::selection {
-    background-color: hsla(128, 56%, 67%, 0.5);
+    background-color: hsla(128, 56%, 67%, 50%);
 }
 
 /* EN-TÊTE */
@@ -133,7 +133,7 @@ img.icone {
     width: 30px;
 }
 
-img.icone:hover {
+a:hover img.icone {
     transform: scale(111%);
 }
 
@@ -163,6 +163,21 @@ th:first-child {
 }
 th, td {
     font-family: arial;
+
+    padding: 10px;
+}
+td.lien {
+    padding: 0;
+}
+td:hover {
+    outline: 3px solid hsla(78, 76%, 56%, 95%);
+}
+
+td.lien a {
+    display: block;
+
+    width: 50px;
+    height: 50px;
 
     padding: 10px;
 }
