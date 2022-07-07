@@ -43,14 +43,15 @@ class Achats
     #[ORM\Column(type: 'string', length: 255)]
     private $ticket_achat;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $manuel_utilisation;
-
+    
     #[ORM\OneToMany(mappedBy: 'achats', targetEntity: PhotoFactures::class, orphanRemoval: true)]
     private $photoFactures;
 
     #[ORM\OneToMany(mappedBy: 'achats', targetEntity: Images::class, orphanRemoval: true)]
     private $images;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $manuel_utilisation;
 
     public function __construct()
     {
@@ -159,17 +160,7 @@ class Achats
         return $this;
     }
 
-    public function getManuelUtilisation(): ?string
-    {
-        return $this->manuel_utilisation;
-    }
 
-    public function setManuelUtilisation(string $manuel_utilisation): self
-    {
-        $this->manuel_utilisation = $manuel_utilisation;
-
-        return $this;
-    }
 
     public function getCategories(): ?Categories
     {
@@ -239,6 +230,18 @@ class Achats
                 $image->setAchats(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getManuelUtilisation(): ?string
+    {
+        return $this->manuel_utilisation;
+    }
+
+    public function setManuelUtilisation(?string $manuel_utilisation): self
+    {
+        $this->manuel_utilisation = $manuel_utilisation;
 
         return $this;
     }
