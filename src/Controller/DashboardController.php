@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -210,5 +211,51 @@ class DashboardController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('achats');
+    }
+    /**
+     * @Route("/tableau_de_bord/statistiques", name="statistiques")
+     */
+    public function statistiques(Request $request): Response
+    {
+        $form = $this->createFormBuilder()
+                     ->add('debut_periode', DateType::class)
+                     ->add('fin_periode', DateType::class)
+                     ->getForm();
+
+        $form->handleRequest($request);
+
+        $repoAchats = $this->getDoctrine()->getRepository(Achats::class);
+        $repoCategories = $this->getDoctrine()->getRepository(Categories::class);
+
+        $achats = $repoAchats->findAll();
+        $categories = $repoCategories->findAll();
+
+        $statistiques = [];
+
+        $intervalle_couleur = round(360 / count($categories));
+        $couleur = 0;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($categories as $categorie) {
+                $couleur += $intervalle_couleur;
+                $statistiques[$categorie->getId()] = [
+                    'nom' => $categorie->getName(),
+                    'somme_depensee' => 0,
+                    'teinte' => $couleur
+                ];
+            }
+            dump($statistiques);
+            foreach ($achats as $achat) {
+                if ($achat->getDateAchat() >= $form['debut_periode']->getData() and $achat->getDateAchat() <= $form['fin_periode']->getData()) {
+                    $statistiques[$achat->getCategorie()->getId()]['somme_depensee'] += $achat->getPrix();
+                }
+            }
+            dump($statistiques);
+        }
+
+        return $this->render('tableau_de_bord/statistiques.html.twig', [
+            'form_periode' => $form->createView(),
+            'statistiques' => $statistiques
+        ]);
     }
 }
