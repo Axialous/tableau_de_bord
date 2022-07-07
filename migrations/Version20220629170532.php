@@ -20,14 +20,14 @@ final class Version20220629170532 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE achats ADD slug VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE categories ADD slug VARCHAR(255) NOT NULL');
+        //$this->addSql('ALTER TABLE achats ADD slug VARCHAR(255) NOT NULL');
+       // $this->addSql('ALTER TABLE categories ADD slug VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE achats DROP slug');
-        $this->addSql('ALTER TABLE categories DROP slug');
+        //$this->addSql('ALTER TABLE achats DROP slug');
+        //$this->addSql('ALTER TABLE categories DROP slug');
     }
 }
