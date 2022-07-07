@@ -3,27 +3,22 @@
 {% block title %}Inscription{% endblock %}
 
 {% block main %}
-<section class="container">
-    <div class="row">
-        <div class="col">
-        <h1>Inscription</h1>
+    <section>
+        <figure>
+            <figcaption>
+                <h1>Inscription</h1>
+            </figcaption>
 
-    {{ form_start(registrationForm) }}
-    <fieldset class="mb-3">
-    {{ form_row(registrationForm.lastname) }}
-    {{ form_row(registrationForm.firstname) }}
-    {{ form_row(registrationForm.email) }}
-    </fieldset>
-        
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.RGPDConsent) }}
+            {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn btn-primary btn-lg my-3">M'inscrire</button>
-    {{ form_end(registrationForm) }}
-        </div>
-    </div>
-</section>
-    
+            {{ form_row(registrationForm.lastname) }}
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+            {{ form_row(registrationForm.RGPDConsent) }}
+
+            <button type="submit" class="btn btn-primary btn-lg my-3">M'inscrire</button>
+            {{ form_end(registrationForm) }}
+        </figure>
+    </section>
 {% endblock %}

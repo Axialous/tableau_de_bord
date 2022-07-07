@@ -6,22 +6,26 @@
 
 {% block main %}
     <section>
-        <h1>Formulaire de modification d'achat</h1>
+        <figure>
+        <figcaption>
+            <h1>Modification de l'achat n<sup>o</sup> {{ id }}</h1>
+        </figcaption>
 
-        {{ form_start(form_modification_achat) }}
+            {{ form_start(form_modification_achat) }}
 
-        {{ form_row(form_modification_achat.nom_produit) }}
-        {{ form_row(form_modification_achat.categorie) }}
-        {{ form_row(form_modification_achat.informations) }}
-        {{ form_row(form_modification_achat.lieu_achat) }}
-        {{ form_row(form_modification_achat.date_achat) }}
-        {{ form_row(form_modification_achat.fin_garantie) }}
-        {{ form_row(form_modification_achat.prix) }}
-        {{ form_row(form_modification_achat.ticket_achat) }}
+            {{ form_row(form_modification_achat.nom_produit) }}
+            {{ form_row(form_modification_achat.categorie) }}
+            {{ form_row(form_modification_achat.informations) }}
+            {{ form_row(form_modification_achat.lieu_achat) }}
+            {{ form_row(form_modification_achat.date_achat) }}
+            {{ form_row(form_modification_achat.fin_garantie) }}
+            {{ form_row(form_modification_achat.prix) }}
+            {{ form_row(form_modification_achat.ticket_achat) }}
+            {{ form_row(form_modification_achat.manuel_utilisation) }}
 
-        <button type="submit" class="btn btn-success">Modifier l'achat</button>
+            <button type="submit" class="btn btn-success">Modifier l'achat</button>
 
-        {{ form_end(form_modification_achat) }}
-
+            {{ form_end(form_modification_achat) }}
+        </figure>
     </section>
 {% endblock %}

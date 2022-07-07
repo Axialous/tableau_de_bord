@@ -6,22 +6,27 @@
 
 {% block main %}
     <section>
-        <h1>Formulaire d'ajout d'achat</h1>
+        <figure>
+            <figcaption>
+                <h1>Formulaire d'ajout d'achat</h1>
+            </figcaption>
 
-        {{ form_start(form_ajout_achat) }}
+            {{ form_start(form_ajout_achat) }}
 
-        {{ form_row(form_ajout_achat.nom_produit) }}
-        {{ form_row(form_ajout_achat.categorie) }}
-        {{ form_row(form_ajout_achat.informations) }}
-        {{ form_row(form_ajout_achat.lieu_achat) }}
-        {{ form_row(form_ajout_achat.date_achat) }}
-        {{ form_row(form_ajout_achat.fin_garantie) }}
-        {{ form_row(form_ajout_achat.prix) }}
-        {{ form_row(form_ajout_achat.ticket_achat) }}
+            {{ form_row(form_ajout_achat.nom_produit) }}
+            {{ form_row(form_ajout_achat.categorie) }}
+            {{ form_row(form_ajout_achat.informations) }}
+            {{ form_row(form_ajout_achat.lieu_achat) }}
+            {{ form_row(form_ajout_achat.date_achat) }}
+            {{ form_row(form_ajout_achat.fin_garantie) }}
+            {{ form_row(form_ajout_achat.prix) }}
+            {{ form_row(form_ajout_achat.ticket_achat) }}
+            {{ form_row(form_ajout_achat.manuel_utilisation) }}
 
-        <button type="submit" class="btn btn-success">Ajouter l'achat</button>
+            <button type="submit" class="btn btn-success">Ajouter l'achat</button>
 
-        {{ form_end(form_ajout_achat) }}
+            {{ form_end(form_ajout_achat) }}
 
+        </figure>
     </section>
 {% endblock %}

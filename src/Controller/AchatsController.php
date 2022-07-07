@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/achats', name: 'achats_')]
-class ProductsController extends AbstractController
+class AchatsController extends AbstractController
 {
     #[Route('/', name: 'index')]
     public function index(): Response

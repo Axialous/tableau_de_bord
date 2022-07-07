@@ -28,6 +28,10 @@ html a:hover {
     justify-content: space-between;
 }
 
+::selection {
+    background-color: hsla(128, 56%, 67%, 0.5);
+}
+
 /* EN-TÊTE */
 
 header {
@@ -49,6 +53,8 @@ header {
 header h1 {
     color: hsla(0, 0%, 100%, 95%);
     font-family: 'Courgette', serif;
+
+    margin: 10px;
 }
 
 header nav {
@@ -70,6 +76,11 @@ header a {
     margin: 10px;
 }
 
+header > a {
+    display: flex ;
+    align-items: center;
+}
+
 header a:hover {
     color: hsla(74, 76%, 56%, 95%);
 }
@@ -78,8 +89,12 @@ header a:hover {
 
 section {
     padding: 25px 7%;
+}
 
-    overflow-x: scroll;
+@media screen and (max-width: 868px) {
+    section {
+        overflow-x: scroll;
+    }
 }
 
 section > * {
@@ -114,8 +129,20 @@ section nav a:hover {
     text-decoration: underline;
 }
 
+img.icone {
+    width: 30px;
+}
+
+img.icone:hover {
+    transform: scale(111%);
+}
+
+/* TABLEAUX */
+
 table {
     max-width: calc(86vw - 20px);
+
+    margin: 10px 0;
 }
 
 tr {
@@ -140,15 +167,36 @@ th, td {
     padding: 10px;
 }
 
-img.icone {
-    width: 30px;
-}
-
-img.icone:hover {
-    transform: scale(111%);
-}
-
-table img:not(.icone) {
+table img {
     max-width: 500px;
     max-height: 1000px;
+}
+
+/* Formulaires */
+
+button {
+    background-color: hsl(88, 58%, 40%) !important;
+    border: solid 1px hsl(88, 58%, 40%) !important;
+}
+
+textarea {
+    resize: both !important;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    box-shadow: 0 0 0 0.25rem hsla(128, 56%, 67%, 0.5) !important;
+    border: solid 1px hsl(121, 53%, 55%) !important;
+}
+
+input:checked {
+    background-color: hsl(123, 67%, 20%) !important;
+    border: solid 1px hsl(123, 67%, 20%) !important;
+}
+
+form > a {
+    color: hsl(0, 0%, 0%);
+}
+
+form > a:hover {
+    color: hsl(123, 67%, 20%);
 }
