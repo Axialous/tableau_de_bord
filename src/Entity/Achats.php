@@ -40,8 +40,11 @@ class Achats
     #[ORM\Column(type: 'text')]
     private $informations;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'string', length: 255)]
     private $ticket_achat;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $manuel_utilisation;
 
     #[ORM\OneToMany(mappedBy: 'achats', targetEntity: PhotoFactures::class, orphanRemoval: true)]
     private $photoFactures;
@@ -152,6 +155,18 @@ class Achats
     public function setTicketAchat(string $ticket_achat): self
     {
         $this->ticket_achat = $ticket_achat;
+
+        return $this;
+    }
+
+    public function getManuelUtilisation(): ?string
+    {
+        return $this->manuel_utilisation;
+    }
+
+    public function setManuelUtilisation(string $manuel_utilisation): self
+    {
+        $this->manuel_utilisation = $manuel_utilisation;
 
         return $this;
     }

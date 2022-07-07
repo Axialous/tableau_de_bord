@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="icon" href="{{ asset('images/logo.svg') }}">
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial=1.0">
@@ -23,7 +23,7 @@
     </head>
     <body>
         <header>
-            <a href="{{ path('tableau_de_bord') }}"><h1>Tableau de bord</h1></a>
+            <a href="{{ path('tableau_de_bord') }}"><img src="{{ asset('images/logo.svg') }}" alt="Logo"><h1>Tableau de bord</h1></a>
             <nav>
                 <a href="{{ path('achats') }}">Liste des achats</a>
                 <a href="{{ path('ajout_achat') }}">Ajouter un achat</a>

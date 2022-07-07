@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use PDO;
 use App\Entity\Achats;
 use App\Entity\Categories;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,7 +21,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/", name="tableau_de_bord")
      */
-    public function index(): Response
+    public function index():response
     {
         return $this->render('tableau_de_bord/index.html.twig', [
             'controller_name' => 'DashboardController',
@@ -62,7 +63,11 @@ class DashboardController extends AbstractController
                      ->add('informations')
                      ->add('ticket_achat', FileType::class, [
                          'mapped' => false
-                         ])
+                     ])
+                     ->add('manuel_utilisation', FileType::class, [
+                         'mapped' => false,
+                         'required' => false
+                     ])
                      ->getForm();
 
         $form->handleRequest($request);
@@ -72,15 +77,24 @@ class DashboardController extends AbstractController
 
             $ticket_achat_file = $form->get('ticket_achat')->getData();
             if ($ticket_achat_file) {
-                $nom_original_file = pathinfo($ticket_achat_file->getClientOriginalName(), PATHINFO_FILENAME);
-                $nom_securise_file = $slugger->slug($nom_original_file);
-                $nom_nouveau_file = $nom_securise_file.'-'.uniqid().'.'.$ticket_achat_file->guessExtension();
+                $nom_file = 'ticket_' . uniqid() . '.' . $ticket_achat_file->guessExtension();
                 try {
-                    $ticket_achat_file->move($this->getParameter('direction_tickets'), $nom_nouveau_file);
+                    $ticket_achat_file->move($this->getParameter('direction_tickets'), $nom_file);
                 } catch (FileException $e) {
 
                 }
-                $achat->setTicketAchat($nom_nouveau_file);
+                $achat->setTicketAchat($nom_file);
+            }
+
+            $manuel_utilisation_file = $form->get('manuel_utilisation')->getData();
+            if ($manuel_utilisation_file) {
+                $nom_file = 'manuel_' . uniqid() . '.' . $manuel_utilisation_file->guessExtension();
+                try {
+                    $manuel_utilisation_file->move($this->getParameter('direction_manuels'), $nom_file);
+                } catch (FileException $e) {
+
+                }
+                $achat->setManuelUtilisation($nom_file);
             }
 
             $manager->persist($achat);
@@ -128,7 +142,11 @@ class DashboardController extends AbstractController
                      ->add('ticket_achat', FileType::class, [
                          'mapped' => false,
                          'required' => false
-                         ])
+                     ])
+                     ->add('manuel_utilisation', FileType::class, [
+                         'mapped' => false,
+                         'required' => false
+                     ])
                      ->getForm();
 
         $form->handleRequest($request);
@@ -138,13 +156,24 @@ class DashboardController extends AbstractController
 
             $ticket_achat_file = $form->get('ticket_achat')->getData();
             if ($ticket_achat_file) {
-                $nom_file = 'ticket_' . $id . '.' . $ticket_achat_file->guessExtension();
+                $nom_file = 'ticket_' . uniqid() . '.' . $ticket_achat_file->guessExtension();
                 try {
                     $ticket_achat_file->move($this->getParameter('direction_tickets'), $nom_file);
                 } catch (FileException $e) {
 
                 }
                 $achat->setTicketAchat($nom_file);
+            }
+
+            $manuel_utilisation_file = $form->get('manuel_utilisation')->getData();
+            if ($manuel_utilisation_file) {
+                $nom_file = 'manuel_' . uniqid() . '.' . $manuel_utilisation_file->guessExtension();
+                try {
+                    $manuel_utilisation_file->move($this->getParameter('direction_manuels'), $nom_file);
+                } catch (FileException $e) {
+
+                }
+                $achat->setManuelUtilisation($nom_file);
             }
 
             $manager->persist($achat);
@@ -155,6 +184,7 @@ class DashboardController extends AbstractController
 
         return $this->render('tableau_de_bord/modification_achat.html.twig', [
             'form_modification_achat' => $form->createView(),
+            'id' => $id
         ]);
     }
     /**
@@ -174,7 +204,7 @@ class DashboardController extends AbstractController
         $achats = $this->getDoctrine()->getRepository(Achats::class);
         $achat = $achats->find($id);
 
-        unlink($this->getparameter('direction_tickets') . '/' . $achat->getTicketAchat());
+        @unlink($this->getparameter('direction_tickets') . '/' . $achat->getTicketAchat());
 
         $manager->remove($achat);
         $manager->flush();
