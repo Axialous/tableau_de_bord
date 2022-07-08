@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use PDO;
+use Assert\NotNull;
 use App\Entity\Achats;
 use App\Entity\Categories;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,9 +11,12 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -52,11 +56,33 @@ class DashboardController extends AbstractController
      */
     public function ajout_achat(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): response
     {
+        $repoCategories = $this->getDoctrine()->getRepository(Categories::class);
+        $categories = $repoCategories->findAll();
+
+        $options_categorie = ['' => NULL];
+        foreach ($categories as $categorie) {
+            if ($categorie->getParent() == NULL) {
+                $options_categorie[$categorie->getName()] = [];
+            }
+        }
+        foreach ($categories as $categorie) {
+            if ($categorie->getParent() != NULL) {
+                $options_categorie[$categorie->getParent()->getName()][$categorie->getName()] = $categorie;
+            }
+        }
+
         $achat = new Achats();
 
         $form = $this->createFormBuilder($achat)
                      ->add('nom_produit')
-                     ->add('categorie')
+                     ->add('categorie', ChoiceType::class, [
+                        'choices' => $options_categorie,
+                        'constraints' => [
+                            new Assert\NotNull([
+                                'message' => "Vous devez choisir une catégorie."
+                            ])
+                        ]
+                     ])
                      ->add('lieu_achat')
                      ->add('date_achat')
                      ->add('fin_garantie')
@@ -129,12 +155,29 @@ class DashboardController extends AbstractController
      */
     public function modification_achat($id, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger) :response
     {
+        $repoCategories = $this->getDoctrine()->getRepository(Categories::class);
+        $categories = $repoCategories->findAll();
+
+        $options_categorie = [];
+        foreach ($categories as $categorie) {
+            if ($categorie->getParent() == NULL) {
+                $options_categorie[$categorie->getName()] = [];
+            }
+        }
+        foreach ($categories as $categorie) {
+            if ($categorie->getParent() != NULL) {
+                $options_categorie[$categorie->getParent()->getName()][$categorie->getName()] = $categorie;
+            }
+        }
+
         $achats = $this->getDoctrine()->getRepository(Achats::class);
         $achat = $achats->find($id);
 
         $form = $this->createFormBuilder($achat)
                      ->add('nom_produit')
-                     ->add('categorie')
+                     ->add('categorie', ChoiceType::class, [
+                        'choices' => $options_categorie
+                     ])
                      ->add('lieu_achat')
                      ->add('date_achat')
                      ->add('fin_garantie')
@@ -180,7 +223,7 @@ class DashboardController extends AbstractController
             $manager->persist($achat);
             $manager->flush();
 
-            return $this->redirectToRoute('visualisation_achat', ['id' => $achat->getId()]);
+            // return $this->redirectToRoute('visualisation_achat', ['id' => $achat->getId()]);
         }
 
         return $this->render('tableau_de_bord/modification_achat.html.twig', [
@@ -220,6 +263,9 @@ class DashboardController extends AbstractController
         $form = $this->createFormBuilder()
                      ->add('debut_periode', DateType::class)
                      ->add('fin_periode', DateType::class)
+                     ->add('secteurs', CheckboxType::class, [
+                        'required' => false
+                    ])
                      ->getForm();
 
         $form->handleRequest($request);
@@ -232,22 +278,39 @@ class DashboardController extends AbstractController
 
         $statistiques = [];
 
-        $intervalle_couleur = round(360 / count($categories));
-        $couleur = 0;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nombre_couleurs = 0;
+
             foreach ($categories as $categorie) {
-                $couleur += $intervalle_couleur;
-                $statistiques[$categorie->getId()] = [
-                    'nom' => $categorie->getName(),
-                    'somme_depensee' => 0,
-                    'teinte' => $couleur
-                ];
+                if (($form['secteurs']->getData() && $categorie->getParent() == NULL)
+                 || (!$form['secteurs']->getData() && $categorie->getParent() != NULL)) {
+                    $nombre_couleurs++;
+                }
             }
-            dump($statistiques);
+            $intervalle_couleurs = round(360 / $nombre_couleurs);
+            $couleur = 0;
+
+            foreach ($categories as $categorie) {
+                if (($form['secteurs']->getData() && $categorie->getParent() == NULL)
+                 || (!$form['secteurs']->getData() && $categorie->getParent() != NULL)) {
+                    $couleur += $intervalle_couleurs;
+                    $statistiques[$categorie->getId()] = [
+                        'nom' => $categorie->getName(),
+                        'somme_depensee' => 0,
+                        'teinte' => $couleur
+                    ];
+                }
+            }
+
             foreach ($achats as $achat) {
-                if ($achat->getDateAchat() >= $form['debut_periode']->getData() and $achat->getDateAchat() <= $form['fin_periode']->getData()) {
-                    $statistiques[$achat->getCategorie()->getId()]['somme_depensee'] += $achat->getPrix();
+                if ($achat->getDateAchat() >= $form['debut_periode']->getData()
+                and $achat->getDateAchat() <= $form['fin_periode']->getData()) {
+                    if (!$form['secteurs']->getData()) {
+                        $statistiques[$achat->getCategorie()->getId()]['somme_depensee'] += $achat->getPrix();
+                    } else {
+                        $statistiques[$achat->getCategorie()->getParent()->getId()]['somme_depensee'] += $achat->getPrix();
+                    }
                 }
             }
             dump($statistiques);
@@ -255,7 +318,11 @@ class DashboardController extends AbstractController
 
         return $this->render('tableau_de_bord/statistiques.html.twig', [
             'form_periode' => $form->createView(),
-            'statistiques' => $statistiques
+            'statistiques' => $statistiques,
+            'periode' => [
+                'debut' => $form['debut_periode']->getData(),
+                'fin' => $form['fin_periode']->getData()
+            ]
         ]);
     }
 }
