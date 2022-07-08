@@ -39,6 +39,53 @@ html a:hover {
     height: 40vh;
 }
 
+[info-bulle] {
+    position: relative;
+}
+
+[info-bulle]::before {
+    content: attr(info-bulle);
+    display: none;
+
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    z-index: 47;
+    transform: translate(-50%, -100%);
+
+    background-color: hsl(64, 62%, 55%);
+    border-radius: 3px;
+    color: hsl(108, 8%, 12%);
+    font-weight: 555;
+    white-space: nowrap;
+
+    padding: 5px 10px;
+}
+
+[info-bulle]::after {
+    content: "";
+    display: none;
+
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    z-index: 47;
+    transform: translate(-50%, -100%);
+
+    background: url(../../images/fleche-bulle.svg);
+    background-size: contain;
+
+    width: 10px;
+    height: 10px;
+}
+
+[info-bulle]:hover::before,
+[info-bulle]:focus::before,
+[info-bulle]:hover::after,
+[info-bulle]:focus::after {
+    display: block;
+}
+
 /* EN-TÊTE */
 
 header {
@@ -117,6 +164,10 @@ figure {
     width: fit-content;
 }
 
+figcaption nav {
+    margin-left: 20px;
+}
+
 section nav {    
     display: flex;
     background-color: hsl(123, 41%, 29%);
@@ -129,7 +180,7 @@ section nav {
 section nav a {
     display: block;
 
-    margin: 10px;
+    padding: 10px;
 }
 
 section nav a:hover {

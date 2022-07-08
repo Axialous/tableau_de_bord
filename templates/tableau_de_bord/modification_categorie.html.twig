@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form_modification_categorie 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Modifier une catégorie{% endblock %}
+
+{% block main %}
+    <section>
+        <figure>
+        <figcaption>
+            <h1>Modifier la catégorie d'achats n<sup>o</sup> {{ id }}</h1>
+        </figcaption>
+
+            {{ form_start(form_modification_categorie) }}
+
+                {{ form_row(form_modification_categorie.name, {'label': 'Nom'}) }}
+                {{ form_row(form_modification_categorie.parent, {'label': 'Secteur d\'activité'}) }}
+
+                <button type="submit" class="btn btn-success">Modifier la catégorie</button>
+
+            {{ form_end(form_modification_categorie) }}
+        </figure>
+    </section>
+{% endblock %}

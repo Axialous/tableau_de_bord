@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block main %}
+<section>
+    <figure>
+        <figcaption class="ligne ecartee">
+            <h1>Liste des secteurs d'activité</h1>
+            <nav>
+                <a info-bulle="Ajouter" href="{{ path('ajout_secteur') }}"><img class="icone" src="{{ asset('images/ajout.svg') }}" alt="Ajouter"></a>
+            </nav>
+        </figcaption>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Nombre de catégories</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for secteur in categories %}
+                {% if secteur.parent == NULL %}
+                    <tr>
+                        <th>{{ secteur.name }}</th>
+                        <td>
+                            {% set nombre_categories = 0 %}
+                            {% for categorie in categories %}
+                                {% if categorie.parent != NULL and categorie.parent.id == secteur.id %}
+                                    {% set nombre_categories = nombre_categories + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ nombre_categories }}
+                        </td>
+                        <td class="lien"><a href="{{ path('modification_secteur', {'id': secteur.id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a></td>
+                        <td class="lien"><a href="{{ path('suppression_categorie', {'id': secteur.id}) }}"><img class="icone" src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </figure>
+
+    <figure>
+        <figcaption class="ligne ecartee">
+            <h1>Liste des catégories</h1>
+            <nav>
+                <a info-bulle="Ajouter" href="{{ path('ajout_categorie') }}"><img class="icone" src="{{ asset('images/ajout.svg') }}" alt="Ajouter"></a>
+            </nav>
+        </figcaption>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Secteur d'activité</th>
+                <th>Nombre d'achats</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for categorie in categories %}
+                {% if categorie.parent != NULL %}
+                    <tr>
+                        <th>{{ categorie.name }}</th>
+                        <td>{{ categorie.parent.name }}</td>
+                        <td>
+                            {% set nombre_achats = 0 %}
+                            {% for achat in achats %}
+                                {% if achat.categorie.id == categorie.id %}
+                                    {% set nombre_achats = nombre_achats + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ nombre_achats }}
+                        </td>
+                        <td class="lien"><a href="{{ path('modification_categorie', {'id': categorie.id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a></td>
+                        <td class="lien"><a href="{{ path('suppression_categorie', {'id': categorie.id}) }}"><img class="icone" src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </figure>
+</section>
+{% endblock %}

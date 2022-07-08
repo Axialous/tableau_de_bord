@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if type == 'secteur' %}
+        Supprimer un secteur
+    {% else %}
+        Supprimer une catégorie
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <section>
+        {% if suppression_impossible == 0 %}
+            {% if type == 'secteur' %}
+                <h1>Voulez-vous vraiment supprimer le secteur d'activité n<sup>o</sup> {{ id }} ?</h1>
+            {% else %}
+                <h1>Voulez-vous vraiment supprimer la catégorie d'achats n<sup>o</sup> {{ id }} ?</h1>
+            {% endif %}
+            <nav class="ligne">
+                <a info-bulle="Valider" href="{{ path('suppression_categorie_valide', {'id': id}) }}"><img class="icone" src="{{ asset('images/valider.svg') }}" alt="Valider"></a>
+                <a info-bulle="Annuler" href="{{ path('categories') }}"><img class="icone" src="{{ asset('images/annuler.svg') }}" alt="Annuler"></a>
+            </nav>
+        {% else %}
+            {% if type == 'secteur' %}
+                <h1>Vous ne pouvez pas supprimer ce secteur : il contient {{ suppression_impossible }} catégorie{% if suppression_impossible > 1 %}s{% endif %}.</h1>
+            {% else %}
+                <h1>Vous ne pouvez pas supprimer cette catégorie : elle contient {{ suppression_impossible }} achat{% if suppression_impossible > 1 %}s{% endif %}.</h1>
+            {% endif %}
+            <nav class="ligne">
+                <a info-bulle="Retour" href="{{ path('categories')}}"><img class="icone" src="{{ asset('images/retour.svg') }}" alt="Retour"></a>
+                    {% if type == 'secteur' %}
+                        <a info-bulle="Éditer" href="{{ path('modification_secteur', {'id': id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a>
+                    {% else %}
+                        <a info-bulle="Éditer" href="{{ path('modification_categorie', {'id': id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a>
+                    {% endif %}
+            </nav>
+        {% endif %}
+    </section>
+{% endblock %}

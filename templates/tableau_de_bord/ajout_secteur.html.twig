@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form_ajout_secteur 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Ajouter un secteur{% endblock %}
+
+{% block main %}
+    <section>
+        <figure>
+            <figcaption>
+                <h1>Ajouter un secteur d'activité</h1>
+            </figcaption>
+
+            {{ form_start(form_ajout_secteur) }}
+
+                {{ form_row(form_ajout_secteur.name, {'label': 'Nom'}) }}
+
+                <button type="submit" class="btn btn-success">Ajouter le secteur</button>
+
+            {{ form_end(form_ajout_secteur) }}
+
+        </figure>
+    </section>
+{% endblock %}

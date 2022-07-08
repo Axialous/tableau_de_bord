@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form_modification_secteur 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Modifier un secteur{% endblock %}
+
+{% block main %}
+    <section>
+        <figure>
+        <figcaption>
+            <h1>Modifier le secteur d'activité n<sup>o</sup> {{ id }}</h1>
+        </figcaption>
+
+            {{ form_start(form_modification_secteur) }}
+
+                {{ form_row(form_modification_secteur.name, {'label': 'Nom'}) }}
+
+                <button type="submit" class="btn btn-success">Modifier le secteur</button>
+
+            {{ form_end(form_modification_secteur) }}
+        </figure>
+    </section>
+{% endblock %}

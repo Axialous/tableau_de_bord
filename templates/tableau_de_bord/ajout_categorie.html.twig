@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form_ajout_categorie 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Ajouter une catégorie{% endblock %}
+
+{% block main %}
+    <section>
+        <figure>
+            <figcaption>
+                <h1>Ajouter une catégorie d'achats</h1>
+            </figcaption>
+
+            {{ form_start(form_ajout_categorie) }}
+
+                {{ form_row(form_ajout_categorie.name, {'label': 'Nom'}) }}
+                {{ form_row(form_ajout_categorie.parent, {'label': 'Secteur d\'activité'}) }}
+
+                <button type="submit" class="btn btn-success">Ajouter la catégorie</button>
+
+            {{ form_end(form_ajout_categorie) }}
+
+        </figure>
+    </section>
+{% endblock %}
