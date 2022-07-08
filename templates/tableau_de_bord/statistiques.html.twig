@@ -11,9 +11,11 @@
         {% if statistiques %}
             <figure>
                 <figcaption>
-                    <h1>Comparaison des sommes dépensées par secteur du {#{  }#} au {#{  }#}</h1>
+                    <h1>Comparaison des sommes dépensées par secteur du {{ periode.debut|date('d/m/Y') }} au {{ periode.fin|date('d/m/Y') }}</h1>
                 </figcaption>
-                <canvas id="myChart" width="400" height="100"></canvas>
+                <div class="chart-container graphique">
+                    <canvas id="myChart"></canvas>
+                </div>
                 <script>
                 const ctx = document.getElementById('myChart');
                 const myChart = new Chart(ctx, {
@@ -21,30 +23,31 @@
                     data: {
                         labels: [
                             {% for categorie in statistiques %}
-                                '{{ categorie['nom'] }}',
+                                '{{ categorie.nom }} ',
                             {% endfor %}
                         ],
                         datasets: [{
-                            label: '# of Votes',
+                            label: 'Sommes dépensées par secteurs',
                             data: [
                                 {% for categorie in statistiques %}
-                                    {{ categorie['somme_depensee'] }},
+                                    {{ categorie.somme_depensee }},
                                 {% endfor %}
                             ],
                             backgroundColor: [
                                 {% for categorie in statistiques %}
-                                    'hsla({{ categorie['teinte'] }}, 80%, 50%, 0.2)',
+                                    'hsla({{ categorie.teinte }}, 80%, 50%, 0.2)',
                                 {% endfor %}
                             ],
                             borderColor: [
                                 {% for categorie in statistiques %}
-                                    'hsla({{ categorie['teinte'] }}, 80%, 50%, 1)',
+                                    'hsla({{ categorie.teinte }}, 80%, 50%, 1)',
                                 {% endfor %}
                             ],
                             borderWidth: 1
                         }]
                     },
                     options: {
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true
@@ -61,12 +64,16 @@
                 <h1>Sur quelle période voulez-vous étudier les sommes dépensées ?</h1>
             </figcaption>
 
-            {{ form_start(form_periode, {'attr': {'class': 'ligne ecartee'}}) }}
+            {{ form_start(form_periode) }}
 
-                {{ form_row(form_periode.debut_periode, {'label': 'Date de début'}) }}
-                {{ form_row(form_periode.fin_periode, {'label': 'Date de fin'}) }}
+                <div class="ligne ecartee">
+                    {{ form_row(form_periode.debut_periode, {'label': 'Date de début'}) }}
+                    {{ form_row(form_periode.fin_periode, {'label': 'Date de fin'}) }}
 
-                <button type="submit" class="btn btn-success">Afficher le graphique</button>
+                    <button type="submit" class="btn btn-success">Afficher le graphique</button>
+                </div>
+
+                {{ form_row(form_periode.secteurs, {'label': 'Afficher les secteurs d\'activité'})}}
 
             {{ form_end(form_periode) }}
         </figure>

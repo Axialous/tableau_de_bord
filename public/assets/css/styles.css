@@ -32,8 +32,11 @@ html a:hover {
     background-color: hsla(128, 56%, 67%, 50%);
 }
 
-canvas {
-    max-height: 60vh;
+.graphique {
+    position: relative;
+    
+    width: 80vw;
+    height: 40vh;
 }
 
 /* EN-TÊTE */
@@ -193,16 +196,16 @@ table img {
 
 /* Formulaires */
 
-form.ligne {
+form > div.ligne {
     align-items: baseline;
     flex-wrap: wrap;
 }
 
-form.ligne > *:not(:last-child) {
+form > div.ligne > *:not(:last-child) {
     margin-right: 20px;
 }
 
-form.ligne > *:not(button) {
+form > div.ligne > *:not(button) {
     flex-grow: 1;
 }
 
