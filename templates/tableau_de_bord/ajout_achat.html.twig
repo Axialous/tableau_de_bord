@@ -14,7 +14,12 @@
             {{ form_start(form_ajout_achat) }}
 
                 {{ form_row(form_ajout_achat.nom_produit, {'label': 'Nom'}) }}
-                {{ form_row(form_ajout_achat.categorie, {'label': 'Catégorie'}) }}
+                <div class="ligne ecartee v-centree">
+                    {{ form_row(form_ajout_achat.categorie, {'label': 'Catégorie'}) }}
+                    <nav>
+                        <a info-bulle="Ajouter" href="{{ path('ajout_categorie') }}"><img class="icone" src="{{ asset('images/ajout.svg') }}" alt="Ajouter"></a>
+                    </nav>
+                </div>
                 {{ form_row(form_ajout_achat.informations, {'label': 'Informations sur le produit'}) }}
                 {{ form_row(form_ajout_achat.lieu_achat, {'label': 'Lieu d\'achat'}) }}
                 {{ form_row(form_ajout_achat.date_achat, {'label': 'Date d\'achat'}) }}
