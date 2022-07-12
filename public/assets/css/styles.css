@@ -28,6 +28,10 @@ html a:hover {
     justify-content: space-between;
 }
 
+.v-centree {
+    align-items: center !important;
+}
+
 ::selection {
     background-color: hsla(128, 56%, 67%, 50%);
 }
@@ -256,7 +260,7 @@ form > div.ligne > *:not(:last-child) {
     margin-right: 20px;
 }
 
-form > div.ligne > *:not(button) {
+form > div.ligne > *:not(button):not(nav) {
     flex-grow: 1;
 }
 

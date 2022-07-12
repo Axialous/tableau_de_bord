@@ -45,10 +45,12 @@
                 <th>Ticket d'achat</th>
                 <td><img src="{{ asset('donnees/tickets/' ~ achat.ticketAchat) }}" alt="Ticket d'achat n° {{ achat.id }}"></td>
             </tr>
-            <tr>
-                <th>Manuel d'utilisation</th>
-                <td><a href="{{ asset('donnees/manuels/' ~ achat.manuelUtilisation) }}" target="_blank">Voir le manuel d'utilisation</a></td>
-            </tr>
+            {% if achat.manuelUtilisation != NULL %}
+                <tr>
+                    <th>Manuel d'utilisation</th>
+                    <td><a href="{{ asset('donnees/manuels/' ~ achat.manuelUtilisation) }}" target="_blank">Voir le manuel d'utilisation</a></td>
+                </tr>
+            {% endif %}
         </table>
     </figure>
 </section>

@@ -18,6 +18,7 @@ class UsersFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        // FRED
         $admin = new Users();
         $admin->setEmail('webdev@info.fr');
         $admin->setLastname('Gauthier');
@@ -29,18 +30,17 @@ class UsersFixtures extends Fixture
 
         $manager->persist($admin);
 
-        $faker = Faker\Factory::create('fr_FR');
+        // ALEXIS
+        $admin = new Users();
+        $admin->setEmail('alexis@info.fr');
+        $admin->setLastname('Bonnet');
+        $admin->setFirstname('Alexis');
+        $admin->setPassword(
+            $this->passwordEncoder->hashPassword($admin, '7777777')
+        );
+        $admin->setRoles(['ROLE_ADMIN']);
 
-        for($usr = 1; $usr <= 5; $usr++){
-            $user = new Users();
-            $user->setEmail($faker->email);
-            $user->setLastname($faker->lastName);
-            $user->setFirstname($faker->firstName);
-            $user->setPassword(
-                $this->passwordEncoder->hashPassword($user, 'user')
-            );
-            $manager->persist($user);
-        }
+        $manager->persist($admin);
 
         $manager->flush();
     }

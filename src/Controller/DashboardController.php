@@ -23,6 +23,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class DashboardController extends AbstractController
 {
+    public function __construct(private SluggerInterface $slugger){}
+
     /**
      * @Route("/", name="tableau_de_bord")
      */
@@ -52,7 +54,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/tableau_de_bord/achats/ajout", name="ajout_achat")
      */
-    public function ajout_achat(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): response
+    public function ajout_achat(Request $request, EntityManagerInterface $manager): response
     {
         $repoCategories = $this->getDoctrine()->getRepository(Categories::class);
         $categories = $repoCategories->findAll();
@@ -98,7 +100,7 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $achat->setSlug("texte");
+            $achat->setSlug($this->slugger->slug($achat->getNomProduit())->lower());
 
             $ticket_achat_file = $form->get('ticket_achat')->getData();
             if ($ticket_achat_file) {
@@ -194,7 +196,7 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $achat->setSlug("texte");
+            $achat->setSlug($this->slugger->slug($achat->getNomProduit())->lower());
 
             $ticket_achat_file = $form->get('ticket_achat')->getData();
             if ($ticket_achat_file) {
@@ -374,7 +376,7 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $secteur->setSlug("texte");
+            $secteur->setSlug($this->slugger->slug($secteur->getName())->lower());
 
             $manager->persist($secteur);
             $manager->flush();
@@ -418,7 +420,7 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categorie->setSlug("texte");
+            $categorie->setSlug($this->slugger->slug($categorie->getName())->lower());
 
             $manager->persist($categorie);
             $manager->flush();
@@ -445,7 +447,7 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $secteur->setSlug("texte");
+            $secteur->setSlug($this->slugger->slug($secteur->getName())->lower());
 
             $manager->persist($secteur);
             $manager->flush();
@@ -486,7 +488,7 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categorie->setSlug("texte");
+            $categorie->setSlug($this->slugger->slug($categorie->getName())->lower());
 
             $manager->persist($categorie);
             $manager->flush();
