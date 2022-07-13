@@ -107,7 +107,7 @@ class AchatsFixtures extends Fixture implements DependentFixtureInterface
             $nom_produit = 'Imprimante 3D',
             $categorie = $this->getReference('categorie-1'),
             $informations = "CONTENU DE LA LIVRAISON Imprimante 3D Wi-Fi 1 extrudeuse 2 buses d'extrusion (1 prémontée, 1 de rechange) 1 lit d'impression flexible (intégré) 1 filament PLA 300 g (1,75 mm) blanc (env. 105 m) 1 filament PLA 300 g (1,75 mm) noir (env. 105 m) 1 filtre de purification de l'air HEPA (prémonté) 1 spatule 1 graisse Fiche secteur Mode d'emploi",
-            $lieu_achat = "https://Optical-Systems.fr",
+            $lieu_achat = "https://www.atome3d.com/",
             $date_achat = DateTime::createFromFormat('d m Y', '15 09 2019'),
             $fin_garantie = DateTime::createFromFormat('d m Y', '15 03 2020'),
             $prix = 379.00 /* € */,
