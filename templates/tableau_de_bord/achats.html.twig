@@ -32,7 +32,7 @@
                     <td>{{ achat.lieuAchat }}</td>
                     <td>{{ achat.dateAchat|date('d/m/Y') }}</td>
                     <td>{{ achat.finGarantie|date('d/m/Y') }}</td>
-                    <td>{{ achat.prix }}</td>
+                    <td>{{ achat.prix }} €</td>
                     <td class="lien"><a href="{{ path('visualisation_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/visualisation.svg') }}" alt="Visualiser"></a></td>
                     <td class="lien"><a href="{{ path('modification_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/edition.svg') }}" alt="Éditer"></a></td>
                     <td class="lien"><a href="{{ path('suppression_achat', {'id': achat.id}) }}"><img class="icone" src="{{ asset('images/suppression.svg') }}" alt="Supprimer"></a></td>
